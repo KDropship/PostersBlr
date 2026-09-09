@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PostersBlr — Posters For Your Vibe</title>
+
+    <meta name="description" content="PostersBlr — affordable posters for travel, motivation and gym motivation.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0b0b12;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* ---------- BACKGROUND ---------- */
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            background: #7c3cff;
+            filter: blur(140px);
+            opacity: 0.18;
+            top: -120px;
+            left: -100px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: #00e5ff;
+            filter: blur(140px);
+            opacity: 0.12;
+            right: -100px;
+            bottom: -100px;
+            z-index: -1;
+        }
+
+        /* ---------- HEADER ---------- */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(18px);
+            background: rgba(11, 11, 18, 0.82);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .navbar {
+            max-width: 1150px;
+            margin: auto;
+            padding: 17px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            background: linear-gradient(90deg, #a855f7, #00e5ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cart-button {
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.06);
+            color: white;
+            padding: 9px 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* ---------- HERO ---------- */
+
+        .hero {
+            max-width: 1150px;
+            margin: auto;
+            padding: 80px 20px 60px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 13px;
+            border-radius: 50px;
+            background: rgba(168,85,247,0.12);
+            border: 1px solid rgba(168,85,247,0.3);
+            color: #d8b4fe;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 10vw, 82px);
+            line-height: 0.95;
+            letter-spacing: -4px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #a855f7, #00e5ff, #a855f7);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientMove 5s linear infinite;
+        }
+
+        @keyframes gradientMove {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .hero p {
+            max-width: 570px;
+            margin: auto;
+            color: #a7a7b5;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ---------- CATEGORIES ---------- */
+
+        .categories {
+            max-width: 1150px;
+            margin: auto;
+            padding: 10px 20px 45px;
+        }
+
+        .section-title {
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .category {
+            min-height: 130px;
+            padding: 22px;
+            border-radius: 22px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.09);
+            transition: 0.25s ease;
+        }
+
+        .category:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .category::before {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            right: -45px;
+            top: -55px;
+            background: rgba(255,255,255,0.12);
+            filter: blur(3px);
+        }
+
+        .travel {
+            background: linear-gradient(135deg, #123b55, #126e83);
+        }
+
+        .motivation {
+            background: linear-gradient(135deg, #42206b, #7c2d9c);
+        }
+
+        .gym {
+            background: linear-gradient(135deg, #351719, #9a302d);
+        }
+
+        .category-icon {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .category h3 {
+            font-size: 19px;
+        }
+
+        .category p {
+            color: rgba(255,255,255,0.68);
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        /* ---------- PRODUCTS ---------- */
+
+        .products {
+            max-width: 1150px;
+            margin: auto;
+            padding: 20px 20px 70px;
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .products-header p {
+            color: #8e8e9c;
+            font-size: 14px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .product-card {
+            background: rgba(255,255,255,0.045);
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.25s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(168,85,247,0.4);
+        }
+
+        .poster-placeholder {
+            aspect-ratio: 3 / 4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 25px;
+            background:
+                radial-gradient(circle at 30% 20%, rgba(0,229,255,0.25), transparent 35%),
+                radial-gradient(circle at 70% 80%, rgba(168,85,247,0.3), transparent 40%),
+                #171722;
+            color: #777788;
+            font-size: 13px;
+        }
+
+        .product-info {
+            padding: 16px;
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+            margin-bottom: 7px;
+        }
+
+        .product-info p {
+            color: #858594;
+            font-size: 13px;
+            margin-bottom: 13px;
+        }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .buy-button {
+            border: none;
+            background: linear-gradient(135deg, #a855f7, #6366f1);
+            color: white;
+            padding: 9px 13px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* ---------- FOOTER ---------- */
+
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 30px 20px;
+            text-align: center;
+            color: #686875;
+            font-size: 13px;
+        }
+
+        /* ---------- MOBILE ---------- */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .hero {
+                padding: 65px 20px 45px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2.5px;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category {
+                min-height: 110px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .product-info {
+                padding: 12px;
+            }
+
+            .product-info h3 {
+                font-size: 14px;
+            }
+
+            .price {
+                font-size: 16px;
+            }
+
+            .buy-button {
+                font-size: 12px;
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                Posters<span>Blr</span>
+            </div>
+
+            <button class="cart-button" onclick="showCart()">
+                🛒 Cart <span id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="hero-badge">
+            ✦ POSTERS FOR YOUR VIBE
+        </div>
+
+        <h1>
+            Make your walls<br>
+            <span>feel different.</span>
+        </h1>
+
+        <p>
+            Affordable posters for the places you dream about,
+            the goals you're chasing and the person you're becoming.
+        </p>
+
+    </section>
+
+
+    <!-- CATEGORIES -->
+    <section class="categories">
+
+        <h2 class="section-title">Explore your vibe</h2>
+
+        <div class="category-grid">
+
+            <div class="category travel" onclick="filterCategory('Travel')">
+                <div class="category-icon">✈️</div>
+                <h3>Travel</h3>
+                <p>Places worth dreaming about.</p>
+            </div>
+
+            <div class="category motivation" onclick="filterCategory('Motivation')">
+                <div class="category-icon">⚡</div>
+                <h3>Motivation</h3>
+                <p>Keep the goal in sight.</p>
+            </div>
+
+            <div class="category gym" onclick="filterCategory('Gym Motivation')">
+                <div class="category-icon">🏋️</div>
+                <h3>Gym Motivation</h3>
+                <p>Train. Push. Repeat.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PRODUCTS -->
+    <section class="products" id="products">
+
+        <div class="products-header">
+
+            <div>
+                <h2 class="section-title">Featured Posters</h2>
+                <p>More designs coming soon.</p>
+            </div>
+
+        </div>
+
+        <div class="product-grid">
+
+            <!-- PRODUCT 1 -->
+            <div class="product-card">
+
+                <div class="poster-placeholder">
+                    POSTER<br>PREVIEW
+                </div>
+
+                <div class="product-info">
+                    <h3>Chase The Horizon</h3>
+                    <p>Travel Collection</p>
+
+                    <div class="product-bottom">
+                        <span class="price">₹29</span>
+
+                        <button class="buy-button"
+                                onclick="buyNow('Chase The Horizon', 'Travel')">
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 2 -->
+            <div class="product-card">
+
+                <div class="poster-placeholder">
+                    POSTER<br>PREVIEW
+                </div>
+
+                <div class="product-info">
+                    <h3>Stay Relentless</h3>
+                    <p>Motivation Collection</p>
+
+                    <div class="product-bottom">
+                        <span class="price">₹29</span>
+
+                        <button class="buy-button"
+                                onclick="buyNow('Stay Relentless', 'Motivation')">
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT 3 -->
+            <div class="product-card">
+
+                <div class="poster-placeholder">
+                    POSTER<br>PREVIEW
+                </div>
+
+                <div class="product-info">
+                    <h3>Earn Your Strength</h3>
+                    <p>Gym Motivation</p>
+
+                    <div class="product-bottom">
+                        <span class="price">₹29</span>
+
+                        <button class="buy-button"
+                                onclick="buyNow('Earn Your Strength', 'Gym Motivation')">
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 PostersBlr · Made for people with a vibe.
+    </footer>
+
+
+    <script>
+
+        let cart = [];
+
+        function buyNow(productName, category) {
+
+            cart.push({
+                name: productName,
+                category: category,
+                price: 29
+            });
+
+            updateCart();
+
+            alert(productName + " added to your cart!");
+
+        }
+
+
+        function updateCart() {
+
+            document.getElementById("cartCount").textContent = cart.length;
+
+        }
+
+
+        function showCart() {
+
+            if (cart.length === 0) {
+
+                alert("Your cart is empty.");
+
+                return;
+
+            }
+
+            let message = "Your Cart:\\n\\n";
+
+            cart.forEach(function(item, index) {
+
+                message +=
+                    (index + 1) +
+                    ". " +
+                    item.name +
+                    " — ₹" +
+                    item.price +
+                    "\\n";
+
+            });
+
+            message +=
+                "\\nTotal: ₹" +
+                (cart.length * 29);
+
+            alert(message);
+
+        }
+
+
+        function filterCategory(category) {
+
+            alert("Showing " + category + " posters soon!");
+
+            document.getElementById("products").scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+    </script>
+
+</body>
+              </html>
