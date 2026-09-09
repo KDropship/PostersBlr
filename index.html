@@ -2,1042 +2,731 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#09090f">
-<title>PostersBlr — Posters For Your Vibe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POSTERSBLR</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
 body{
-font-family:Arial,Helvetica,sans-serif;
-background:#08080e;
-color:#fff;
-overflow-x:hidden
-}
-body:before,body:after{
-content:"";position:fixed;border-radius:50%;
-filter:blur(130px);pointer-events:none;z-index:-1
-}
-body:before{
-width:420px;height:420px;background:#713cff;
-opacity:.15;top:-180px;left:-160px
-}
-body:after{
-width:420px;height:420px;background:#00d9ff;
-opacity:.08;right:-180px;bottom:-120px
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at top left,rgba(255,0,150,.15),transparent 30%),
+    radial-gradient(circle at bottom right,rgba(0,200,255,.12),transparent 30%),
+    #08080c;
+  color:#fff;
+  min-height:100vh;
 }
 
-/* NAV */
-nav{
-position:sticky;top:0;z-index:1000;
-display:flex;justify-content:space-between;align-items:center;
-padding:15px 5%;
-background:rgba(8,8,14,.84);
-backdrop-filter:blur(18px);
-border-bottom:1px solid rgba(255,255,255,.08)
+header{
+  padding:25px 20px;
+  text-align:center;
+  background:linear-gradient(135deg,#11111a,#17172a);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  box-shadow:0 0 30px rgba(130,80,255,.12);
 }
+
 .logo{
-font-size:25px;font-weight:900;letter-spacing:-1px
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:2px;
+  background:linear-gradient(90deg,#ff3cac,#784ba0,#2b86c5);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
-.logo span{
-background:linear-gradient(90deg,#00d9ff,#795cff,#ff42d0);
--webkit-background-clip:text;color:transparent
+
+.tagline{
+  margin-top:7px;
+  color:#aaa;
+  font-size:14px;
 }
+
+nav{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+}
+
+nav button{
+  background:#15151f;
+  border:1px solid #29293a;
+  color:#fff;
+  padding:9px 16px;
+  border-radius:20px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+nav button:hover,
+nav button.active{
+  background:linear-gradient(90deg,#ff3cac,#784ba0);
+  border-color:transparent;
+}
+
 .cart-btn{
-border:1px solid rgba(255,255,255,.14);
-background:#171720;color:#fff;
-padding:11px 16px;border-radius:13px;
-font-weight:800;cursor:pointer
+  margin-top:15px;
+  background:linear-gradient(90deg,#00c6ff,#0072ff);
+  border:none;
+  color:white;
+  padding:10px 20px;
+  border-radius:22px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-/* HERO */
-.hero{
-min-height:570px;display:flex;align-items:center;
-justify-content:center;text-align:center;padding:70px 20px
-}
-.hero-inner{max-width:850px}
-.badge{
-display:inline-block;padding:10px 16px;border-radius:50px;
-background:rgba(117,75,255,.1);
-border:1px solid rgba(150,110,255,.25);
-color:#c9bbff;font-size:12px;font-weight:800;
-letter-spacing:1px;margin-bottom:25px
-}
-.hero h1{
-font-size:clamp(48px,10vw,88px);
-line-height:.95;letter-spacing:-5px
-}
-.gradient{
-background:linear-gradient(90deg,#00d9ff,#795cff,#ff42d0);
--webkit-background-clip:text;color:transparent
-}
-.hero p{
-color:#9b9ba8;max-width:620px;margin:25px auto 0;
-font-size:18px;line-height:1.6
-}
-.explore{
-margin-top:30px;padding:14px 24px;border:0;
-border-radius:13px;color:white;font-weight:900;
-background:linear-gradient(90deg,#6235ed,#a636e2);
-cursor:pointer
-}
-
-/* SECTIONS */
-.section{
-width:90%;max-width:1200px;margin:auto;padding:55px 0
-}
-.title{font-size:36px;letter-spacing:-1.5px}
-.subtitle{color:#888895;margin-top:8px;margin-bottom:28px}
-
-/* CATEGORIES */
-.categories{
-display:grid;grid-template-columns:repeat(3,1fr);gap:20px
-}
-.category{
-height:190px;border-radius:25px;padding:28px;
-position:relative;overflow:hidden;cursor:pointer;
-border:1px solid rgba(255,255,255,.1);
-transition:.25s
-}
-.category:hover{transform:translateY(-5px)}
-.category:after{
-content:"";position:absolute;width:170px;height:170px;
-border-radius:50%;right:-55px;top:-60px;
-background:rgba(255,255,255,.14);filter:blur(10px)
-}
-.travel{background:linear-gradient(135deg,#06455b,#07879a)}
-.motivation{background:linear-gradient(135deg,#351057,#8b31c6)}
-.gym{background:linear-gradient(135deg,#4d1717,#ad3d3d)}
-.icon{font-size:38px;margin-bottom:20px}
-.category h3{font-size:25px;margin-bottom:7px}
-.category p{color:rgba(255,255,255,.7)}
-
-/* FILTERS */
-.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:28px}
-.filter{
-padding:10px 16px;border-radius:50px;
-border:1px solid rgba(255,255,255,.1);
-background:#11111a;color:#999;cursor:pointer;font-weight:700
-}
-.filter.active,.filter:hover{
-background:linear-gradient(90deg,#6336ed,#a936e2);
-color:white;border-color:transparent
-}
-
-/* PRODUCTS */
 .products{
-display:grid;grid-template-columns:repeat(3,1fr);gap:22px
+  max-width:1100px;
+  margin:35px auto;
+  padding:0 20px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
 }
+
 .card{
-background:#12121b;border:1px solid rgba(255,255,255,.08);
-border-radius:21px;overflow:hidden;transition:.25s
+  background:rgba(22,22,31,.9);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:12px;
+  overflow:hidden;
+  transition:.25s;
+  box-shadow:0 10px 35px rgba(0,0,0,.25);
 }
-.card:hover{transform:translateY(-5px)}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 15px 40px rgba(120,75,160,.22);
+}
+
 .poster{
-aspect-ratio:3/4;cursor:pointer;position:relative;
-display:flex;align-items:center;justify-content:center;
-text-align:center;overflow:hidden
-}
-.poster:before{
-content:"";position:absolute;inset:13px;
-border:1px solid rgba(255,255,255,.25)
-}
-.poster small{
-position:absolute;top:30px;font-size:10px;
-letter-spacing:4px;font-weight:900;opacity:.7
-}
-.poster strong{
-font-size:38px;line-height:.93;
-letter-spacing:-2px;z-index:1
-}
-.poster em{
-position:absolute;bottom:28px;font-style:normal;
-font-size:10px;letter-spacing:3px;opacity:.65
+  width:100%;
+  aspect-ratio:3/4;
+  object-fit:cover;
+  border-radius:12px;
+  cursor:pointer;
+  display:block;
 }
 
-.t1{background:linear-gradient(145deg,#006d77,#83c5be)}
-.t2{background:linear-gradient(145deg,#ff7b00,#e63946,#4d194d)}
-.t3{background:linear-gradient(145deg,#1d3557,#457b9d,#a8dadc)}
-.m1{background:linear-gradient(145deg,#5f0f40,#9a031e,#fb8b24)}
-.m2{background:linear-gradient(145deg,#240046,#5a189a,#9d4edd)}
-.m3{background:linear-gradient(145deg,#003049,#0077b6,#00b4d8)}
-.g1{background:linear-gradient(145deg,#111,#650000,#d00000)}
-.g2{background:linear-gradient(145deg,#161a1d,#343a40,#6c757d)}
-.g3{background:linear-gradient(145deg,#081c15,#1b4332,#40916c)}
-
-.info{padding:17px}
-.info h3{font-size:18px;margin-bottom:5px}
-.cat{font-size:13px;color:#858592;margin-bottom:14px}
-.row{display:flex;align-items:center;justify-content:space-between}
-.price{font-size:20px;font-weight:900}
-.actions{display:flex;gap:7px}
-.actions button{
-border:0;border-radius:10px;padding:9px 11px;
-font-weight:800;cursor:pointer;color:white
-}
-.preview{background:#292933}
-.buy{background:linear-gradient(90deg,#6235ed,#a636e2)}
-
-.empty{
-display:none;text-align:center;padding:50px;color:#888
+.card h3{
+  font-size:17px;
+  margin:12px 2px 5px;
 }
 
-/* MODALS */
-.overlay{
-display:none;position:fixed;inset:0;z-index:3000;
-background:rgba(0,0,0,.75);backdrop-filter:blur(8px);
-align-items:center;justify-content:center;padding:18px
+.price{
+  color:#00d4ff;
+  font-weight:bold;
+  margin:4px 2px 10px;
 }
-.overlay.show{display:flex}
+
+.card-buttons{
+  display:flex;
+  gap:7px;
+}
+
+.card button{
+  flex:1;
+  border:none;
+  padding:10px 5px;
+  border-radius:9px;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.preview-btn{
+  background:#29293a;
+}
+
+.buy-btn{
+  background:linear-gradient(90deg,#ff3cac,#784ba0);
+}
+
+.cart-add{
+  background:linear-gradient(90deg,#00c6ff,#0072ff);
+}
+
 .modal{
-width:100%;max-width:520px;max-height:90vh;
-overflow:auto;background:#15151f;
-border:1px solid rgba(255,255,255,.12);
-border-radius:23px;padding:23px
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.88);
+  z-index:1000;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
 }
-.modal-head{
-display:flex;justify-content:space-between;align-items:center;
-margin-bottom:20px
+
+.modal-content{
+  position:relative;
+  max-width:95vw;
+  max-height:95vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
-.modal-head h2{font-size:24px}
+
+.modal img{
+  width:min(92vw,520px);
+  height:min(78vh,700px);
+  aspect-ratio:3/4;
+  object-fit:contain;
+  border-radius:12px;
+  box-shadow:0 0 40px rgba(255,255,255,.15);
+}
+
 .close{
-border:0;background:#292933;color:#fff;
-width:37px;height:37px;border-radius:50%;
-font-size:20px;cursor:pointer
+  position:absolute;
+  top:-15px;
+  right:-15px;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:none;
+  background:#fff;
+  color:#000;
+  font-size:22px;
+  cursor:pointer;
+  z-index:2;
 }
 
-/* PREVIEW */
-.preview-poster{
-width:min(290px,90%);aspect-ratio:3/4;
-margin:0 auto 18px;border-radius:13px;
-display:flex;align-items:center;justify-content:center;
-text-align:center;position:relative;overflow:hidden
+.form-modal{
+  background:#12121a;
+  width:min(94vw,450px);
+  border:1px solid #2b2b3d;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 20px 70px rgba(0,0,0,.5);
 }
 
-/* FORM */
-label{
-display:block;font-size:13px;color:#aaa;
-font-weight:700;margin-bottom:7px
-}
-.field{margin-bottom:14px}
-input,textarea{
-width:100%;padding:13px;border-radius:11px;
-border:1px solid rgba(255,255,255,.12);
-background:#0d0d15;color:white;outline:none;
-font-family:inherit
-}
-textarea{min-height:80px;resize:vertical}
-.summary{
-background:#0d0d15;border:1px solid rgba(255,255,255,.08);
-border-radius:13px;padding:14px;margin:15px 0
-}
-.summary-line{
-display:flex;justify-content:space-between;
-padding:5px 0;color:#aaa
-}
-.total{
-border-top:1px solid rgba(255,255,255,.1);
-margin-top:7px;padding-top:12px;
-display:flex;justify-content:space-between;
-font-size:19px;font-weight:900;color:white
-}
-.whatsapp{
-width:100%;padding:14px;border:0;border-radius:12px;
-background:#25d366;color:#06200d;
-font-weight:900;font-size:15px;cursor:pointer
+.form-modal h2{
+  margin-bottom:16px;
+  font-size:23px;
 }
 
-/* CART */
-.cart-list{display:flex;flex-direction:column;gap:11px}
+.form-modal input,
+.form-modal textarea{
+  width:100%;
+  margin-bottom:11px;
+  padding:12px;
+  border-radius:9px;
+  border:1px solid #303042;
+  background:#0c0c12;
+  color:#fff;
+  outline:none;
+}
+
+.form-modal textarea{
+  resize:none;
+  min-height:80px;
+}
+
+.form-modal button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(90deg,#25d366,#128c7e);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.cart-panel{
+  position:fixed;
+  right:-100%;
+  top:0;
+  width:min(90vw,400px);
+  height:100vh;
+  background:#111119;
+  z-index:1200;
+  padding:22px;
+  transition:.3s;
+  box-shadow:-15px 0 50px rgba(0,0,0,.5);
+  overflow-y:auto;
+}
+
+.cart-panel.open{
+  right:0;
+}
+
+.cart-panel h2{
+  margin-bottom:18px;
+}
+
 .cart-item{
-display:flex;gap:12px;padding:11px;
-background:#0d0d15;border-radius:13px
+  display:flex;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px solid #292936;
 }
-.mini{
-width:60px;height:76px;border-radius:7px;flex-shrink:0
+
+.cart-item img{
+  width:60px;
+  height:80px;
+  object-fit:cover;
+  border-radius:7px;
 }
-.cart-info{flex:1}
-.cart-info h4{font-size:14px;margin-bottom:5px}
-.cart-info p{font-size:12px;color:#888}
-.qty{display:flex;align-items:center;gap:7px;margin-top:8px}
-.qty button{
-width:26px;height:26px;border:0;border-radius:7px;
-background:#292933;color:#fff;cursor:pointer
+
+.cart-item-info{
+  flex:1;
 }
-.remove{
-font-size:12px;color:#ff7373;cursor:pointer;margin-left:8px
+
+.cart-item-info h4{
+  font-size:14px;
+  margin-bottom:5px;
 }
+
+.cart-item-info p{
+  color:#00d4ff;
+  font-size:13px;
+}
+
+.remove-btn{
+  background:#29293a;
+  color:#fff;
+  border:none;
+  padding:5px 8px;
+  border-radius:6px;
+  cursor:pointer;
+  height:max-content;
+}
+
 .cart-total{
-margin-top:18px;padding-top:14px;
-border-top:1px solid rgba(255,255,255,.1);
-display:flex;justify-content:space-between;
-font-size:20px;font-weight:900
-}
-.cart-empty{text-align:center;color:#888;padding:40px 10px}
-
-footer{
-border-top:1px solid rgba(255,255,255,.07);
-text-align:center;color:#686875;padding:35px 15px;margin-top:50px
+  margin-top:20px;
+  font-size:18px;
+  font-weight:bold;
 }
 
-/* MOBILE */
-@media(max-width:800px){
-.categories,.products{grid-template-columns:1fr}
-.hero{min-height:500px}
+.cart-order{
+  margin-top:15px;
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(90deg,#25d366,#128c7e);
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
 }
-@media(max-width:500px){
-nav{padding:13px 4%}
-.logo{font-size:21px}
-.hero h1{font-size:50px;letter-spacing:-3px}
-.hero p{font-size:16px}
-.section{width:92%}
-.category{height:175px}
-.actions{flex:1}
-.actions button{flex:1}
+
+.empty-cart{
+  color:#999;
+  text-align:center;
+  margin-top:40px;
+}
+
+@media(max-width:700px){
+  .products{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+    padding:0 12px;
+    margin-top:25px;
+  }
+
+  .card{
+    padding:8px;
+    border-radius:13px;
+  }
+
+  .card h3{
+    font-size:13px;
+    margin-top:8px;
+  }
+
+  .price{
+    font-size:13px;
+    margin-bottom:7px;
+  }
+
+  .card-buttons{
+    flex-direction:column;
+    gap:5px;
+  }
+
+  .card button{
+    padding:8px 4px;
+    font-size:11px;
+  }
+
+  .logo{
+    font-size:27px;
+  }
+
+  .modal{
+    padding:10px;
+  }
+
+  .modal img{
+    width:92vw;
+    height:82vh;
+    max-height:82vh;
+  }
+
+  .close{
+    top:-5px;
+    right:-5px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-<div class="logo">Posters<span>Blr</span></div>
-<button class="cart-btn" onclick="openCart()">🛒 Cart <span id="cartCount">0</span></button>
-</nav>
+<header>
+  <div class="logo">POSTERSBLR</div>
+  <div class="tagline">Make your walls say something.</div>
 
-<section class="hero">
-<div class="hero-inner">
-<div class="badge">✦ POSTERS FOR YOUR VIBE</div>
-<h1>Make your walls<br><span class="gradient">feel different.</span></h1>
-<p>Affordable posters for the places you dream about, the goals you chase, and the person you're becoming.</p>
-<button class="explore" onclick="goProducts()">Explore Posters ↓</button>
-</div>
+  <nav>
+    <button class="active" onclick="filterProducts('all',this)">All</button>
+    <button onclick="filterProducts('travel',this)">Travel</button>
+    <button onclick="filterProducts('motivation',this)">Motivation</button>
+    <button onclick="filterProducts('gym',this)">Gym Motivation</button>
+  </nav>
+
+  <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cartCount">0</span>)</button>
+</header>
+
+<section class="products">
+
+  <!-- TRAVEL -->
+  <div class="card" data-category="travel" data-name="Chase The Horizon" data-price="29" data-image="travel1.jpg">
+    <img src="travel1.jpg" class="poster" onclick="previewPoster(this.src)">
+    <h3>Chase The Horizon</h3>
+    <div class="price">₹29</div>
+    <div class="card-buttons">
+      <button class="preview-btn" onclick="previewPoster(this.closest('.card').querySelector('.poster').src)">Preview</button>
+      <button class="cart-add" onclick="addOnlyToCart(this.closest('.card'))">Add to Cart</button>
+      <button class="buy-btn" onclick="buyNow(this.closest('.card'))">Buy Now</button>
+    </div>
+  </div>
+
+  <div class="card" data-category="travel" data-name="Find Your Way" data-price="29" data-image="travel2.jpg">
+    <img src="travel2.jpg" class="poster" onclick="previewPoster(this.src)">
+    <h3>Find Your Way</h3>
+    <div class="price">₹29</div>
+    <div class="card-buttons">
+      <button class="preview-btn" onclick="previewPoster(this.closest('.card').querySelector('.poster').src)">Preview</button>
+      <button class="cart-add" onclick="addOnlyToCart(this.closest('.card'))">Add to Cart</button>
+      <button class="buy-btn" onclick="buyNow(this.closest('.card'))">Buy Now</button>
+    </div>
+  </div>
+
+  <div class="card" data-category="travel" data-name="Go Somewhere" data-price="29" data-image="travel3.jpg">
+    <img src="travel3.jpg" class="poster" onclick="previewPoster(this.src)">
+    <h3>Go Somewhere</h3>
+    <div class="price">₹29</div>
+    <div class="card-buttons">
+      <button class="preview-btn" onclick="previewPoster(this.closest('.card').querySelector('.poster').src)">Preview</button>
+      <button class="cart-add" onclick="addOnlyToCart(this.closest('.card'))">Add to Cart</button>
+      <button class="buy-btn" onclick="buyNow(this.closest('.card'))">Buy Now</button>
+    </div>
+  </div>
+
+  <!-- MOTIVATION -->
+  <div class="card" data-category="motivation" data-name="Stay Relentless" data-price="29" data-image="motivation1.jpg">
+    <img src="motivation1.jpg" class="poster" onclick="previewPoster(this.src)">
+    <h3>Stay Relentless</h3>
+    <div class="price">₹29</div>
+    <div class="card-buttons">
+      <button class="preview-btn" onclick="previewPoster(this.closest('.card').querySelector('.poster').src)">Preview</button>
+      <button class="cart-add" onclick="addOnlyToCart(this.closest('.card'))">Add to Cart</button>
+      <button class="buy-btn" onclick="buyNow(this.closest('.card'))">Buy Now</button>
+    </div>
+  </div>
+
+  <div class="card" data-category="motivation" data-name="No Excuses" data-price="29" data-image="motivation2.jpg">
+    <img src="motivation2.jpg" class="poster" onclick="previewPoster(this.src)">
+    <h3>No Excuses</h3>
+    <div class="price">₹29</div>
+    <div class="card-buttons">
+      <button class="preview-btn" onclick="previewPoster(this.closest('.card').querySelector('.poster').src)">Preview</button>
+      <button class="cart-add" onclick="addOnlyToCart(this.closest('.card'))">Add to Cart</button>
+      <button class="buy-btn" onclick="buyNow(this.closest('.card'))">Buy Now</button>
+    </div>
+  </div>
+
+  <div class="card" data-category="motivation" data-name="Keep Going" data-price="29" data-image="motivation3.jpg">
+    <img src="motivation3.jpg" class="poster" onclick="previewPoster(this.src)">
+    <h3>Keep Going</h3>
+    <div class="price">₹29</div>
+    <div class="card-buttons">
+      <button class="preview-btn" onclick="previewPoster(this.closest('.card').querySelector('.poster').src)">Preview</button>
+      <button class="cart-add" onclick="addOnlyToCart(this.closest('.card'))">Add to Cart</button>
+      <button class="buy-btn" onclick="buyNow(this.closest('.card'))">Buy Now</button>
+    </div>
+  </div>
+
+  <!-- GYM MOTIVATION -->
+  <div class="card" data-category="gym" data-name="Earn Your Strength" data-price="29" data-image="gym1.jpg">
+    <img src="gym1.jpg" class="poster" onclick="previewPoster(this.src)">
+    <h3>Earn Your Strength</h3>
+    <div class="price">₹29</div>
+    <div class="card-buttons">
+      <button class="preview-btn" onclick="previewPoster(this.closest('.card').querySelector('.poster').src)">Preview</button>
+      <button class="cart-add" onclick="addOnlyToCart(this.closest('.card'))">Add to Cart</button>
+      <button class="buy-btn" onclick="buyNow(this.closest('.card'))">Buy Now</button>
+    </div>
+  </div>
+
+  <div class="card" data-category="gym" data-name="Built Not Born" data-price="29" data-image="gym2.jpg">
+    <img src="gym2.jpg" class="poster" onclick="previewPoster(this.src)">
+    <h3>Built Not Born</h3>
+    <div class="price">₹29</div>
+    <div class="card-buttons">
+      <button class="preview-btn" onclick="previewPoster(this.closest('.card').querySelector('.poster').src)">Preview</button>
+      <button class="cart-add" onclick="addOnlyToCart(this.closest('.card'))">Add to Cart</button>
+      <button class="buy-btn" onclick="buyNow(this.closest('.card'))">Buy Now</button>
+    </div>
+  </div>
+
+  <div class="card" data-category="gym" data-name="One More Rep" data-price="29" data-image="gym3.jpg">
+    <img src="gym3.jpg" class="poster" onclick="previewPoster(this.src)">
+    <h3>One More Rep</h3>
+    <div class="price">₹29</div>
+    <div class="card-buttons">
+      <button class="preview-btn" onclick="previewPoster(this.closest('.card').querySelector('.poster').src)">Preview</button>
+      <button class="cart-add" onclick="addOnlyToCart(this.closest('.card'))">Add to Cart</button>
+      <button class="buy-btn" onclick="buyNow(this.closest('.card'))">Buy Now</button>
+    </div>
+  </div>
+
 </section>
-
-<section class="section">
-<h2 class="title">Explore your vibe</h2>
-<p class="subtitle">Pick a category and find your poster.</p>
-
-<div class="categories">
-
-<div class="category travel" onclick="filterCategory('Travel')">
-<div class="icon">✈️</div>
-<h3>Travel</h3>
-<p>Places worth dreaming about.</p>
-</div>
-
-<div class="category motivation" onclick="filterCategory('Motivation')">
-<div class="icon">⚡</div>
-<h3>Motivation</h3>
-<p>Keep the goal in sight.</p>
-</div>
-
-<div class="category gym" onclick="filterCategory('Gym Motivation')">
-<div class="icon">🏋️</div>
-<h3>Gym Motivation</h3>
-<p>Train. Push. Repeat.</p>
-</div>
-
-</div>
-</section>
-
-<section class="section" id="products">
-<h2 class="title">Posters</h2>
-<p class="subtitle">Every poster is ₹29.</p>
-
-<div class="filters">
-<button class="filter active" onclick="filterCategory('All',this)">All</button>
-<button class="filter" onclick="filterCategory('Travel',this)">Travel</button>
-<button class="filter" onclick="filterCategory('Motivation',this)">Motivation</button>
-<button class="filter" onclick="filterCategory('Gym Motivation',this)">Gym Motivation</button>
-</div>
-
-<div class="products" id="productGrid">
-
-<!-- TRAVEL -->
-<div class="card" data-category="Travel" data-id="t1" data-name="Chase The Horizon">
-<div class="poster t1" onclick="previewProduct(this.parentElement)">
-<small>POSTERSBLR</small><strong>CHASE<br>THE<br>HORIZON</strong><em>TRAVEL</em>
-</div>
-<div class="info">
-<h3>Chase The Horizon</h3><div class="cat">Travel</div>
-<div class="row"><div class="price">₹29</div>
-<div class="actions">
-<button class="preview" onclick="previewProduct(this.closest('.card'))">Preview</button>
-<button class="buy" onclick="buyNow(this.closest('.card'))">Buy Now</button>
-</div></div>
-</div></div>
-
-<div class="card" data-category="Travel" data-id="t2" data-name="Find Your Way">
-<div class="poster t2" onclick="previewProduct(this.parentElement)">
-<small>POSTERSBLR</small><strong>FIND<br>YOUR<br>WAY</strong><em>TRAVEL</em>
-</div>
-<div class="info">
-<h3>Find Your Way</h3><div class="cat">Travel</div>
-<div class="row"><div class="price">₹29</div>
-<div class="actions">
-<button class="preview" onclick="previewProduct(this.closest('.card'))">Preview</button>
-<button class="buy" onclick="buyNow(this.closest('.card'))">Buy Now</button>
-</div></div>
-</div></div>
-
-<div class="card" data-category="Travel" data-id="t3" data-name="Go Somewhere">
-<div class="poster t3" onclick="previewProduct(this.parentElement)">
-<small>POSTERSBLR</small><strong>GO<br>SOMEWHERE</strong><em>TRAVEL</em>
-</div>
-<div class="info">
-<h3>Go Somewhere</h3><div class="cat">Travel</div>
-<div class="row"><div class="price">₹29</div>
-<div class="actions">
-<button class="preview" onclick="previewProduct(this.closest('.card'))">Preview</button>
-<button class="buy" onclick="buyNow(this.closest('.card'))">Buy Now</button>
-</div></div>
-</div></div>
-
-<!-- MOTIVATION -->
-<div class="card" data-category="Motivation" data-id="m1" data-name="Stay Relentless">
-<div class="poster m1" onclick="previewProduct(this.parentElement)">
-<small>POSTERSBLR</small><strong>STAY<br>RELENTLESS</strong><em>MOTIVATION</em>
-</div>
-<div class="info">
-<h3>Stay Relentless</h3><div class="cat">Motivation</div>
-<div class="row"><div class="price">₹29</div>
-<div class="actions">
-<button class="preview" onclick="previewProduct(this.closest('.card'))">Preview</button>
-<button class="buy" onclick="buyNow(this.closest('.card'))">Buy Now</button>
-</div></div>
-</div></div>
-
-<div class="card" data-category="Motivation" data-id="m2" data-name="No Excuses">
-<div class="poster m2" onclick="previewProduct(this.parentElement)">
-<small>POSTERSBLR</small><strong>NO<br>EXCUSES</strong><em>MOTIVATION</em>
-</div>
-<div class="info">
-<h3>No Excuses</h3><div class="cat">Motivation</div>
-<div class="row"><div class="price">₹29</div>
-<div class="actions">
-<button class="preview" onclick="previewProduct(this.closest('.card'))">Preview</button>
-<button class="buy" onclick="buyNow(this.closest('.card'))">Buy Now</button>
-</div></div>
-</div></div>
-
-<div class="card" data-category="Motivation" data-id="m3" data-name="Keep Going">
-<div class="poster m3" onclick="previewProduct(this.parentElement)">
-<small>POSTERSBLR</small><strong>KEEP<br>GOING</strong><em>MOTIVATION</em>
-</div>
-<div class="info">
-<h3>Keep Going</h3><div class="cat">Motivation</div>
-<div class="row"><div class="price">₹29</div>
-<div class="actions">
-<button class="preview" onclick="previewProduct(this.closest('.card'))">Preview</button>
-<button class="buy" onclick="buyNow(this.closest('.card'))">Buy Now</button>
-</div></div>
-</div></div>
-
-<!-- GYM -->
-<div class="card" data-category="Gym Motivation" data-id="g1" data-name="Earn Your Strength">
-<div class="poster g1" onclick="previewProduct(this.parentElement)">
-<small>POSTERSBLR</small><strong>EARN<br>YOUR<br>STRENGTH</strong><em>GYM</em>
-</div>
-<div class="info">
-<h3>Earn Your Strength</h3><div class="cat">Gym Motivation</div>
-<div class="row"><div class="price">₹29</div>
-<div class="actions">
-<button class="preview" onclick="previewProduct(this.closest('.card'))">Preview</button>
-<button class="buy" onclick="buyNow(this.closest('.card'))">Buy Now</button>
-</div></div>
-</div></div>
-
-<div class="card" data-category="Gym Motivation" data-id="g2" data-name="Built Not Born">
-<div class="poster g2" onclick="previewProduct(this.parentElement)">
-<small>POSTERSBLR</small><strong>BUILT<br>NOT<br>BORN</strong><em>GYM</em>
-</div>
-<div class="info">
-<h3>Built Not Born</h3><div class="cat">Gym Motivation</div>
-<div class="row"><div class="price">₹29</div>
-<div class="actions">
-<button class="preview" onclick="previewProduct(this.closest('.card'))">Preview</button>
-<button class="buy" onclick="buyNow(this.closest('.card'))">Buy Now</button>
-</div></div>
-</div></div>
-
-<div class="card" data-category="Gym Motivation" data-id="g3" data-name="One More Rep">
-<div class="poster g3" onclick="previewProduct(this.parentElement)">
-<small>POSTERSBLR</small><strong>ONE<br>MORE<br>REP</strong><em>GYM</em>
-</div>
-<div class="info">
-<h3>One More Rep</h3><div class="cat">Gym Motivation</div>
-<div class="row"><div class="price">₹29</div>
-<div class="actions">
-<button class="preview" onclick="previewProduct(this.closest('.card'))">Preview</button>
-<button class="buy" onclick="buyNow(this.closest('.card'))">Buy Now</button>
-</div></div>
-</div></div>
-
-</div>
-
-<div class="empty" id="empty">No posters found.</div>
-</section>
-
-<footer>
-© 2026 PostersBlr · Made for people with a vibe.
-</footer>
 
 <!-- PREVIEW MODAL -->
-<div class="overlay" id="previewModal">
-<div class="modal">
-<div class="modal-head">
-<h2 id="previewTitle">Poster Preview</h2>
-<button class="close" onclick="closeModal('previewModal')">×</button>
-</div>
-<div id="previewPoster" class="preview-poster"></div>
-<h3 id="previewName" style="text-align:center"></h3>
-<p style="text-align:center;color:#888;margin:8px 0 18px">₹29 per poster</p>
-<button class="buy" id="previewBuy" style="width:100%;padding:14px;border:0;border-radius:12px;color:#fff;font-weight:900;cursor:pointer">Buy Now</button>
-</div>
+<div class="modal" id="previewModal" onclick="closePreview(event)">
+  <div class="modal-content">
+    <button class="close" onclick="closePreview()">×</button>
+    <img id="previewImage" src="" alt="Poster Preview">
+  </div>
 </div>
 
 <!-- ORDER MODAL -->
-<div class="overlay" id="orderModal">
-<div class="modal">
-<div class="modal-head">
-<h2>Order Details</h2>
-<button class="close" onclick="closeModal('orderModal')">×</button>
+<div class="modal" id="orderModal">
+  <div class="form-modal">
+    <button class="close" onclick="closeOrder()">×</button>
+    <h2>Order Poster</h2>
+
+    <input type="text" id="customerName" placeholder="Your Name">
+    <input type="text" id="customerPhone" placeholder="Phone Number">
+    <textarea id="customerAddress" placeholder="Delivery Address"></textarea>
+
+    <button onclick="sendOrder()">Order on WhatsApp</button>
+  </div>
 </div>
 
-<div class="field">
-<label>Your Name</label>
-<input id="customerName" placeholder="Enter your name">
+<!-- CART -->
+<div class="cart-panel" id="cartPanel">
+  <button class="close" onclick="toggleCart()">×</button>
+  <h2>Your Cart 🛒</h2>
+
+  <div id="cartItems"></div>
+
+  <div class="cart-total">
+    Total: ₹<span id="cartTotal">0</span>
+  </div>
+
+  <button class="cart-order" onclick="orderCart()">Order Cart on WhatsApp</button>
 </div>
 
-<div class="field">
-<label>Phone Number</label>
-<input id="customerPhone" type="tel" placeholder="Your phone number">
-</div>
-
-<div class="field">
-<label>Delivery Address</label>
-<textarea id="customerAddress" placeholder="Enter your full delivery address"></textarea>
-</div>
-
-<div class="summary" id="orderSummary"></div>
-
-<button class="whatsapp" onclick="sendOrder()">
-💬 Order on WhatsApp
-</button>
-</div>
-</div>
-
-<!-- CART MODAL -->
-<div class="overlay" id="cartModal">
-<div class="modal">
-<div class="modal-head">
-<h2>Your Cart</h2>
-<button class="close" onclick="closeModal('cartModal')">×</button>
-</div>
-
-<div id="cartContent"></div>
-
-</div>
-    </div>
-    <script>
-
-/* =========================
-   POSTERSBLR SETTINGS
-========================= */
-
-const WHATSAPP_NUMBER = "916366788554";
-const POSTER_PRICE = 29;
-
-let cart = JSON.parse(localStorage.getItem("postersblr_cart") || "[]");
-let currentOrder = [];
-let previewCard = null;
-
-
-/* =========================
-   BASIC FUNCTIONS
-========================= */
+<script>
+let cart = JSON.parse(localStorage.getItem("postersblr_cart")) || [];
+let currentProduct = null;
 
 function saveCart(){
-    localStorage.setItem("postersblr_cart", JSON.stringify(cart));
-    updateCartCount();
+  localStorage.setItem("postersblr_cart",JSON.stringify(cart));
+  updateCart();
 }
 
-function updateCartCount(){
-    const count = cart.reduce((total,item)=>total + item.qty,0);
-    document.getElementById("cartCount").textContent = count;
+function updateCart(){
+  document.getElementById("cartCount").textContent=cart.length;
+
+  const items=document.getElementById("cartItems");
+  const total=document.getElementById("cartTotal");
+
+  if(cart.length===0){
+    items.innerHTML='<div class="empty-cart">Your cart is empty.</div>';
+    total.textContent="0";
+    return;
+  }
+
+  let sum=0;
+
+  items.innerHTML=cart.map((item,index)=>{
+    sum+=Number(item.price);
+
+    return `
+      <div class="cart-item">
+        <img src="${item.image}" alt="">
+        <div class="cart-item-info">
+          <h4>${item.name}</h4>
+          <p>₹${item.price}</p>
+        </div>
+        <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+      </div>
+    `;
+  }).join("");
+
+  total.textContent=sum;
 }
-
-function goProducts(){
-    document.getElementById("products").scrollIntoView({
-        behavior:"smooth"
-    });
-}
-
-
-/* =========================
-   CATEGORY FILTER
-========================= */
-
-function filterCategory(category, button){
-
-    const cards = document.querySelectorAll(".card");
-    const filters = document.querySelectorAll(".filter");
-
-    if(button){
-        filters.forEach(x=>x.classList.remove("active"));
-        button.classList.add("active");
-    }
-
-    let visible = 0;
-
-    cards.forEach(card=>{
-
-        if(category === "All" ||
-           card.dataset.category === category){
-
-            card.style.display = "";
-            visible++;
-
-        }else{
-
-            card.style.display = "none";
-
-        }
-
-    });
-
-    document.getElementById("empty").style.display =
-        visible === 0 ? "block" : "none";
-
-    goProducts();
-}
-
-
-/* =========================
-   MODALS
-========================= */
-
-function openModal(id){
-    document.getElementById(id).classList.add("show");
-    document.body.style.overflow="hidden";
-}
-
-function closeModal(id){
-    document.getElementById(id).classList.remove("show");
-    document.body.style.overflow="";
-}
-
-
-/* =========================
-   POSTER PREVIEW
-========================= */
-
-function previewProduct(card){
-
-    previewCard = card;
-
-    const poster = card.querySelector(".poster");
-
-    document.getElementById("previewTitle").textContent =
-        "Poster Preview";
-
-    document.getElementById("previewName").textContent =
-        card.dataset.name;
-
-    const preview = document.getElementById("previewPoster");
-
-    preview.className = "preview-poster " +
-        poster.classList[1];
-
-    preview.innerHTML = poster.innerHTML;
-
-    document.getElementById("previewBuy").onclick = function(){
-        closeModal("previewModal");
-        buyNow(card);
-    };
-
-    openModal("previewModal");
-}
-
-
-/* =========================
-   PRODUCT DATA
-========================= */
-
-function getProduct(card){
-
-    return {
-        id:card.dataset.id,
-        name:card.dataset.name,
-        category:card.dataset.category,
-        price:POSTER_PRICE,
-        className:card.querySelector(".poster").classList[1]
-    };
-
-}
-
-
-/* =========================
-   ADD TO CART
-========================= */
 
 function addToCart(card){
+  cart.push({
+    name:card.dataset.name,
+    price:Number(card.dataset.price),
+    image:card.dataset.image
+  });
 
-    const product = getProduct(card);
-
-    const existing = cart.find(item => item.id === product.id);
-
-    if(existing){
-
-        existing.qty++;
-
-    }else{
-
-        cart.push({
-            ...product,
-            qty:1
-        });
-
-    }
-
-    saveCart();
-
+  saveCart();
 }
 
+function addOnlyToCart(card){
+  addToCart(card);
+  alert(card.dataset.name+" added to your cart! 🛒");
+}
 
-/* =========================
-   BUY NOW
-========================= */
+function removeFromCart(index){
+  cart.splice(index,1);
+  saveCart();
+}
+
+function toggleCart(){
+  document.getElementById("cartPanel").classList.toggle("open");
+}
+
+function previewPoster(src){
+  document.getElementById("previewImage").src=src;
+  document.getElementById("previewModal").style.display="flex";
+}
+
+function closePreview(event){
+  if(!event || event.target.id==="previewModal"){
+    document.getElementById("previewModal").style.display="none";
+  }
+}
+    function filterProducts(category,button){
+  document.querySelectorAll("nav button").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+
+  document.querySelectorAll(".card").forEach(card=>{
+    if(category==="all" || card.dataset.category===category){
+      card.style.display="block";
+    }else{
+      card.style.display="none";
+    }
+  });
+}
 
 function buyNow(card){
+  currentProduct={
+    name:card.dataset.name,
+    price:Number(card.dataset.price),
+    image:card.dataset.image
+  };
 
-    addToCart(card);
+  document.getElementById("customerName").value="";
+  document.getElementById("customerPhone").value="";
+  document.getElementById("customerAddress").value="";
 
-    currentOrder = [{
-        ...getProduct(card),
-        qty:1
-    }];
-
-    showOrderSummary();
-    openModal("orderModal");
-
+  document.getElementById("orderModal").style.display="flex";
 }
 
-
-/* =========================
-   OPEN CART
-========================= */
-
-function openCart(){
-
-    renderCart();
-    openModal("cartModal");
-
+function closeOrder(){
+  document.getElementById("orderModal").style.display="none";
 }
-
-
-/* =========================
-   RENDER CART
-========================= */
-
-function renderCart(){
-
-    const container = document.getElementById("cartContent");
-
-    if(cart.length === 0){
-
-        container.innerHTML =
-            '<div class="cart-empty">Your cart is empty.<br><br>Pick a poster you love.</div>';
-
-        return;
-    }
-
-    let html = '<div class="cart-list">';
-
-    cart.forEach((item,index)=>{
-
-        html += `
-        <div class="cart-item">
-
-            <div class="mini ${item.className}"></div>
-
-            <div class="cart-info">
-
-                <h4>${item.name}</h4>
-
-                <p>${item.category} · ₹${item.price}</p>
-
-                <div class="qty">
-
-                    <button onclick="changeQty(${index},-1)">−</button>
-
-                    <span>${item.qty}</span>
-
-                    <button onclick="changeQty(${index},1)">+</button>
-
-                    <span class="remove"
-                          onclick="removeItem(${index})">
-                        Remove
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-        `;
-
-    });
-
-    html += "</div>";
-
-    const total = getCartTotal();
-
-    html += `
-        <div class="cart-total">
-            <span>Total</span>
-            <span>₹${total}</span>
-        </div>
-
-        <button class="whatsapp"
-                style="margin-top:18px"
-                onclick="checkoutCart()">
-            💬 Checkout on WhatsApp
-        </button>
-    `;
-
-    container.innerHTML = html;
-}
-
-
-/* =========================
-   CART QUANTITY
-========================= */
-
-function changeQty(index,amount){
-
-    cart[index].qty += amount;
-
-    if(cart[index].qty <= 0){
-        cart.splice(index,1);
-    }
-
-    saveCart();
-    renderCart();
-
-}
-
-function removeItem(index){
-
-    cart.splice(index,1);
-
-    saveCart();
-    renderCart();
-
-}
-
-function getCartTotal(){
-
-    return cart.reduce(
-        (total,item)=>total + (item.price * item.qty),
-        0
-    );
-
-}
-
-
-/* =========================
-   CART CHECKOUT
-========================= */
-
-function checkoutCart(){
-
-    if(cart.length === 0){
-        return;
-    }
-
-    currentOrder = cart.map(item=>({...item}));
-
-    closeModal("cartModal");
-
-    showOrderSummary();
-
-    openModal("orderModal");
-
-}
-
-
-/* =========================
-   ORDER SUMMARY
-========================= */
-
-function showOrderSummary(){
-
-    const summary = document.getElementById("orderSummary");
-
-    let html = "";
-
-    let total = 0;
-
-    currentOrder.forEach(item=>{
-
-        const itemTotal = item.price * item.qty;
-
-        total += itemTotal;
-
-        html += `
-            <div class="summary-line">
-                <span>${item.name} × ${item.qty}</span>
-                <span>₹${itemTotal}</span>
-            </div>
-        `;
-
-    });
-
-    html += `
-        <div class="total">
-            <span>Total</span>
-            <span>₹${total}</span>
-        </div>
-    `;
-
-    summary.innerHTML = html;
-
-}
-
-
-/* =========================
-   WHATSAPP ORDER
-========================= */
 
 function sendOrder(){
+  const name=document.getElementById("customerName").value.trim();
+  const phone=document.getElementById("customerPhone").value.trim();
+  const address=document.getElementById("customerAddress").value.trim();
 
-    const name =
-        document.getElementById("customerName").value.trim();
+  if(!name || !phone || !address){
+    alert("Please fill in all details.");
+    return;
+  }
 
-    const phone =
-        document.getElementById("customerPhone").value.trim();
+  const message=
+`Hello PostersBlr! 👋
 
-    const address =
-        document.getElementById("customerAddress").value.trim();
+I want to order:
 
+Poster: ${currentProduct.name}
+Price: ₹${currentProduct.price}
 
-    if(!name){
+Name: ${name}
+Phone: ${phone}
+Address: ${address}`;
 
-        alert("Please enter your name.");
+  const whatsappURL=
+    "https://wa.me/916366788554?text="+encodeURIComponent(message);
 
-        return;
-
-    }
-
-    if(!phone){
-
-        alert("Please enter your phone number.");
-
-        return;
-
-    }
-
-    if(!address){
-
-        alert("Please enter your delivery address.");
-
-        return;
-
-    }
-
-
-    let message =
-        "Hello PostersBlr! 👋%0A%0A" +
-        "*I want to place an order.*%0A%0A";
-
-
-    message +=
-        "*Name:* " +
-        encodeURIComponent(name) +
-        "%0A";
-
-
-    message +=
-        "*Phone:* " +
-        encodeURIComponent(phone) +
-        "%0A";
-
-
-    message +=
-        "*Address:* " +
-        encodeURIComponent(address) +
-        "%0A%0A";
-
-
-    message += "*Order:*%0A";
-
-
-    let total = 0;
-
-
-    currentOrder.forEach(item=>{
-
-        const itemTotal =
-            item.price * item.qty;
-
-        total += itemTotal;
-
-        message +=
-            "• " +
-            encodeURIComponent(item.name) +
-            " × " +
-            item.qty +
-            " = ₹" +
-            itemTotal +
-            "%0A";
-
-    });
-
-
-    message +=
-        "%0A*Total: ₹" +
-        total +
-        "*%0A%0A" +
-        "Please confirm my order. Thank you!";
-
-
-    const url =
-        "https://wa.me/" +
-        WHATSAPP_NUMBER +
-        "?text=" +
-        message;
-
-
-    window.open(url,"_blank");
-
+  window.open(whatsappURL,"_blank");
 }
 
+function orderCart(){
+  if(cart.length===0){
+    alert("Your cart is empty.");
+    return;
+  }
 
-/* =========================
-   STARTUP
-========================= */
+  document.getElementById("orderModal").style.display="flex";
 
-updateCartCount();
+  currentProduct=null;
+}
 
+document.getElementById("orderModal").addEventListener("click",function(e){
+  if(e.target===this){
+    closeOrder();
+  }
+});
 
-/* Close modal when tapping outside */
+function sendOrder(){
+  const name=document.getElementById("customerName").value.trim();
+  const phone=document.getElementById("customerPhone").value.trim();
+  const address=document.getElementById("customerAddress").value.trim();
 
-document.querySelectorAll(".overlay").forEach(overlay=>{
+  if(!name || !phone || !address){
+    alert("Please fill in all details.");
+    return;
+  }
 
-    overlay.addEventListener("click",function(e){
+  let message="Hello PostersBlr! 👋\n\nI want to order:\n\n";
 
-        if(e.target === overlay){
-
-            closeModal(overlay.id);
-
-        }
-
+  if(currentProduct){
+    message+=
+      `Poster: ${currentProduct.name}\n`+
+      `Price: ₹${currentProduct.price}\n`;
+  }else{
+    cart.forEach((item,index)=>{
+      message+=
+        `${index+1}. ${item.name} - ₹${item.price}\n`;
     });
 
-});
+    const total=cart.reduce((sum,item)=>sum+Number(item.price),0);
+    message+=`\nTotal: ₹${total}\n`;
+  }
+
+  message+=
+    `\nName: ${name}`+
+    `\nPhone: ${phone}`+
+    `\nAddress: ${address}`;
+
+  const whatsappURL=
+    "https://wa.me/916366788554?text="+encodeURIComponent(message);
+
+  window.open(whatsappURL,"_blank");
+}
+
+updateCart();
 
 </script>
 
