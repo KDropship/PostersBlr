@@ -157,7 +157,7 @@ nav button.active{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.88);
-  z-index:1000;
+  z-index:1300;
   justify-content:center;
   align-items:center;
   padding:20px;
@@ -588,7 +588,6 @@ function addToCart(card){
 
 function addOnlyToCart(card){
   addToCart(card);
-  alert(card.dataset.name+" added to your cart! 🛒");
 }
 
 function removeFromCart(index){
@@ -678,11 +677,14 @@ function orderCart(){
     return;
   }
 
+  // Close the cart first
+  document.getElementById("cartPanel").classList.remove("open");
+
+  // Then open the order form
   document.getElementById("orderModal").style.display="flex";
 
   currentProduct=null;
 }
-
 document.getElementById("orderModal").addEventListener("click",function(e){
   if(e.target===this){
     closeOrder();
