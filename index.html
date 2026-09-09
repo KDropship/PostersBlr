@@ -596,13 +596,23 @@
 
         function filterCategory(category) {
 
-            alert("Showing " + category + " posters soon!");
+    const products = document.querySelectorAll(".product-card");
 
-            document.getElementById("products").scrollIntoView({
-                behavior: "smooth"
-            });
+    products.forEach(product => {
+        const productCategory = product.getAttribute("data-category");
 
+        if (productCategory === category) {
+            product.style.display = "";
+        } else {
+            product.style.display = "none";
         }
+    });
+
+    document.getElementById("products").scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
 
     </script>
 
